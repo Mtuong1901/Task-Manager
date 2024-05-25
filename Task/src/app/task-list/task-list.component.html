@@ -1,0 +1,57 @@
+<header>
+  <div class="logo">Master Manager</div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Project</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+  <div class="user">
+    <ul>
+      <li><a href="#">Login</a></li>
+    </ul>
+  </div>
+</header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 left-aside">
+      <ul class="nav-left">
+        <li><a href="#">Bang</a></li>
+        <li><a href="#">Thanh vien</a></li>
+        <li><a href="#">Lich</a></li>
+        <li><a href="#">Du an cua ban</a></li>
+      </ul>
+    </div>
+    <div class="col-lg-10 main-side">
+      <h1 class="main-title">Your Project</h1>
+      <div class="project">
+        <div class="project-list row">
+          <div *ngFor="let task of tasks" class="project-item col-md-4">
+            <h4 class="task-name">{{ task.name }}</h4>
+            <p>{{ task.description }}</p>
+            <p>Deadline: {{ task.deadline }}</p>
+            <p>Status: {{ task.status }}</p>
+            <a href="" class="btn btn-primary">View Progress</a>
+            <button (click)="deleteTask(task.id)" class="btn btn-danger btn-sm delete-btn">X</button>
+          </div>
+        </div>
+        <div class="newtask">
+          <button class="openwindow" (click)="toggleForm()">New Project</button>
+        </div>        
+        
+        <div class="form-popup" [ngStyle]="{ 'display': isFormVisible ? 'block' : 'none' }" id="myForm">
+          <div class="form-container">
+            <h5>New Project</h5>
+            <form class="f-content">
+              <input type="text" name="taskname" [(ngModel)]="newTaskName" placeholder="Name Task">
+              <input type="text" name="taskdescription" [(ngModel)]="newTaskDescription" placeholder="description">
+              <button (click)="addTask()">Add Task</button>
+            </form>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
