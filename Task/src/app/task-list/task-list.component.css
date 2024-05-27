@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+.task-container {
+    display: flex; /* Sử dụng flexbox */
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0 10px 50px; /* Lề */
+    max-height: 500px; /* Đặt chiều cao tối đa cho container công việc */
+
+  }
+  
+.task-line {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 1000px;
+}
+
+.task-details {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.task-name {
+    margin: 0 0 0 5px;
+    font-size: 1.5em;
+}
+
+.task-status,
+.task-leader,
+.task-budget {
+    margin: 4px 0 0 10px;
+}
+
+.task-status span,
+.task-leader span,
+.task-budget span {
+    font-weight: bold;
+    color: #555;
+}
