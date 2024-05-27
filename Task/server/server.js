@@ -18,10 +18,62 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
-app.get('/api/data', async (req, res) => {
+app.get('/duan', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM tasks');
+    const [rows] = await pool.query('SELECT * FROM du_an ORDER BY id DESC');
     res.json(rows);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.get('/duan/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await pool.query('SELECT * FROM du_an WHERE id = ?', [id]);
+    if (rows.length > 0) {
+      res.json(rows[0]);
+    } else {
+      res.status(404).json({ error: 'Project not found' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/task', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM task ORDER BY id DESC');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.get('/duan/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await pool.query('SELECT * FROM du_an WHERE id = ?', [id]);
+    if (rows.length > 0) {
+      res.json(rows[0]);
+    } else {
+      res.status(404).json({ error: 'Project not found' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.get('/task/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await pool.query('SELECT * FROM task WHERE id = ?', [id]);
+    if (rows.length > 0) {
+      res.json(rows[0]);
+    } else {
+      res.status(404).json({ error: 'Task not found' });
+    }
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
