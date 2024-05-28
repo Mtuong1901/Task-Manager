@@ -1,16 +1,25 @@
-<div class="search-container">
-  <input type="text" id="search-input" placeholder="Tìm kiếm dự án..." [(ngModel)]="listFilter">
-</div>
-<div class="project-container">
-  <div class="project-card"  *ngFor="let duan of list_duan">
-    <img src="https://cdn.pixabay.com/photo/2024/02/04/10/47/arabiccontest-8551910_640.jpg" alt="Project Image" class="project-image">
-    <div class="project-details">
-        <h2 class="project-name"> {{ duan.ten }}</h2>
-        <p class="project-status">Trạng Thái: <span>Đang tiến hành</span></p>
-        <p class="project-leader">Nhóm Trưởng: <span>{{ duan.nhom_truong }}</span></p>
+<div class="project-section">
+  <div class="option">
+    <div class="add-container">
+      <button>
+        Thêm dự án mới
+      </button>
     </div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Tìm kiếm dự án..." [(ngModel)]="listFilter">
+    </div>
+  </div>
+  <div class="project-container">
+    <div class="project-card"  *ngFor="let duan of list_duan">
+      <img src="https://cdn.pixabay.com/photo/2024/02/04/10/47/arabiccontest-8551910_640.jpg" alt="Project Image" class="project-image">
+      <div class="project-details">
+          <h2 class="project-name"> {{ duan.ten }}</h2>
+          <p class="project-status">Trạng Thái: <span>Đang tiến hành</span></p>
+          <p class="project-leader">Nhóm Trưởng: <span>{{ duan.nhom_truong }}</span></p>
+      </div>
+  </div>
+  </div>
+  <ng-template #noData>
+    <p>No data available</p>
+  </ng-template>
 </div>
-</div>
-<ng-template #noData>
-  <p>No data available</p>
-</ng-template>

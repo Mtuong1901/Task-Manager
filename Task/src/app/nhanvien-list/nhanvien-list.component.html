@@ -1,0 +1,25 @@
+<div class="staff-section">
+  <div class="option">
+    <div class="add-container">
+      <button>
+        Thêm nhân viên mới
+      </button>
+    </div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Tìm kiếm dự án..." [(ngModel)]="listFilter">
+    </div>
+  </div>
+    <div class="project-container">
+      <div class="project-card"  *ngFor="let nv of list_nhanvien">
+        <img src="{{nv.hinh_anh}}" alt="Project Image" class="project-image">
+        <div class="project-details">
+            <h2 class="project-name"> {{ nv.ten_nv }}</h2>
+            <p>Giới tính: {{nv.gioi_tinh}}</p>
+            <p class="project-location">Khu vực: <span>{{ nv.khu_vuc }}</span></p>
+        </div>
+    </div>
+    </div>
+    <ng-template #noData>
+      <p>No data available</p>
+    </ng-template>
+</div>

@@ -7,6 +7,7 @@ import { EditDuanComponent } from './edit-duan/edit-duan.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import { NhanvienListComponent } from './nhanvien-list/nhanvien-list.component';
 
 export const routes: Routes = [
     {path : '',component: HomeComponent,title:'Home' },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path : 'task',component: TaskListComponent},
     {path : 'task/add-task',component: AddTaskComponent},
     {path : 'task/edit-task/id',component:EditTaskComponent},
+    {path : 'thanhvien', component: NhanvienListComponent},
     {path : '**',component: NotfoundComponent}
 ];

@@ -1,9 +1,22 @@
+<div class="task-section">
 
+<div class="option">
+  <div class="add-container">
+    <button>
+      Thêm task
+    </button>
+  </div>
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Tìm kiếm dự án..." [(ngModel)]="listFilter">
+  </div>
+</div>
  <div class="task-container">
   <div class="task-line"*ngFor="let task of list_task">
     <div class="task-details">
       <h2 class="task-name"> {{ task.ten_task }}</h2>
       <p class="task-status">Trạng Thái: <span>{{ task.trang_thai }}</span></p>
+      <a href="" class="arrow-icon"><i class=" arrow fa-solid fa-arrow-right"></i></a>
   </div>
   </div>
  </div>
+</div>

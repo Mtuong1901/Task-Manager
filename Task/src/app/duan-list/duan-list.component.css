@@ -6,6 +6,11 @@ body {
     background-color: #f0f0f0;
     margin: 0;
 }
+.project-section{
+    width: 150vh;
+    height: 500px;
+    margin: 0 0 0 90px;
+}
 .project-container {
     display: flex;
     gap: 20px;
@@ -46,12 +51,17 @@ body {
     font-weight: bold;
     color: #555;
 }
+.option{
+    position: relative;
+
+}
 .search-container {
     margin-bottom: 20px;
     width: 100%;
     max-width: 300px;
-    display: flex;
-    margin: 0 0 0 1045px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 #search-input {
@@ -61,3 +71,23 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.add-container {
+    margin: 20px  0 0 50px;
+  }
+  
+  .add-container button {
+    background-color: #007bff; /* Màu nền của nút */
+    color: white; /* Màu chữ */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .add-container button:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng box-shadow khi hover */
+  }
+  
