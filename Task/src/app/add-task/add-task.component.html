@@ -1,1 +1,36 @@
-<p>add-task works!</p>
+<div class="task-container">
+    <h3>Add New Task</h3>
+    <form>
+      <label for="ten_task">Tên công việc:</label>
+      <input id="ten_task" [(ngModel)]="newTask.ten_task" name="ten_task" required>
+      
+      <label for="mo_ta">Mô tả:</label>
+      <input id="mo_ta" [(ngModel)]="newTask.mo_ta" name="mo_ta" required>
+      
+      <label for="ngay_bat_dau">Ngày bắt đầu:</label>
+      <input id="ngay_bat_dau" [(ngModel)]="newTask.ngay_bat_dau" name="ngay_bat_dau" type="date" required>
+      
+      <label for="ngay_ket_thuc">Ngày kết thúc:</label>
+      <input id="ngay_ket_thuc" [(ngModel)]="newTask.ngay_ket_thuc" name="ngay_ket_thuc" type="date" required>
+      
+      <label for="trang_thai">Trạng thái:</label>
+      <select id="trang_thai" [(ngModel)]="newTask.trang_thai" name="trang_thai" required>
+        <option value="Chưa bắt đầu">Chưa bắt đầu</option>
+        <option value="Đang thực hiện">Đang thực hiện</option>
+        <option value="Đã hoàn thành">Đã hoàn thành</option>
+      </select>
+      
+      <button (click)="addTask()">Thêm công việc</button>
+    </form>
+  </div>
+  <div class="task-list">
+    <div class="task-line"*ngFor="let task of task">
+      <div class="task-details">
+        <h2 class="task-name"> {{ task.ten_task }}</h2>
+        <p class="task-status">Trạng Thái: <span>{{ task.trang_thai }}</span></p>
+        <a href="" class="arrow-icon"><i class=" arrow fa-solid fa-arrow-right"></i></a>
+    </div>
+    </div>
+   </div>
+  
+  

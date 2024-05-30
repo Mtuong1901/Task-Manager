@@ -2,10 +2,11 @@ import { Component,OnInit } from '@angular/core';
 import { ITask } from '../itask';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
+import { RouterLink, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterModule,RouterLink],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })

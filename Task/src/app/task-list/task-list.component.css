@@ -8,7 +8,7 @@ body {
 .task-section{
     width: 150vh;
     align-items: center;
-    margin: 0 0 0 100px;
+    margin: 100px 0 0 100px;
 }
 .task-container {
     display: flex; /* Sử dụng flexbox */

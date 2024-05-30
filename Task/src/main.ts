@@ -3,6 +3,9 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
+  provideHttpClient({
+    ...withFetch(),
+  });

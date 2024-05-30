@@ -9,7 +9,7 @@ body {
 .staff-section{
     width: 150vh;
     height: 500px;
-    margin:  0 0 0 90px;
+    margin:  100px 0 0 90px;
 }
 .project-container {
     display: flex;
