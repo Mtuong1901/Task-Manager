@@ -72,7 +72,17 @@ export class AddTaskComponent implements OnInit {
     // Tạo một số ngẫu nhiên trong khoảng từ 1 đến 1000000
     return Math.floor(Math.random() * 1000000) + 1;
   }
-  
-  
+  deleteTask(id: number): void {
+    this.taskService.deleteTask(id).subscribe(
+      () => {
+        alert('Công việc đã được xóa thành công!');
+        this.task = this.task.filter(t => t.id !== id); // Xóa công việc khỏi mảng task
+      },
+      error => {
+        console.error('Có lỗi xảy ra trong quá trình xóa công việc:', error);
+        alert('Không thể xóa công việc. Vui lòng thử lại sau.');
+      }
+    );
+  }
   }
 

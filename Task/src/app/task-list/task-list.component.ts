@@ -45,4 +45,5 @@ export class TaskListComponent implements OnInit  {
       return this.task.filter((tt: ITask) =>
         tt.ten_task.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
+    
 }

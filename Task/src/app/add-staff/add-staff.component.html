@@ -1,0 +1,39 @@
+<div class="staff-container">
+    <div class="staff-form">
+        <form action="">
+            <label for="">Ten Nhan vien</label><br>
+            <input type="text" name="ten_nv" [(ngModel)]="newStaff.ten_nv"><br>
+            <label for="">Ngay sinh</label><br>
+            <input type="date" name="ngay_sinh"[(ngModel)]="newStaff.ngay_sinh"><br>
+            <label for="">Gioi tinh</label><br>
+            <input type="radio" name="gioi_tinh" value="1" [(ngModel)]="newStaff.gioi_tinh">Nam
+            <input type="radio" name="gioi_tinh" value="0" [(ngModel)]="newStaff.gioi_tinh">Nu <br>
+            <label for="">Khu vuc</label><br>
+            <input type="text" name="khu_vuc" [(ngModel)]="newStaff.khu_vuc"><br>
+            <button type="submit" (click)="addNhanvien()">Them</button>
+        </form>
+    </div>
+    <div class="staff-list">
+        <table class="table table-bordered">
+            <thead>
+                <tr >
+                    <th>Tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Giới tính</th>
+                    <th>Khu vực</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let nv of staff">
+                    <td>{{nv.ten_nv}}</td>
+                    <td>{{nv.ngay_sinh}}</td>
+                    <td>{{nv.gioi_tinh}}</td>
+                    <td>{{nv.khu_vuc}}</td>
+                    <td><a href="">Edit</a>/<a href="" >Delete</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>

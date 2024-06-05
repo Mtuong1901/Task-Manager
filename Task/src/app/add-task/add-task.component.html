@@ -28,7 +28,8 @@
       <div class="task-details">
         <h2 class="task-name"> {{ task.ten_task }}</h2>
         <p class="task-status">Trạng Thái: <span>{{ task.trang_thai }}</span></p>
-        <a href="" class="arrow-icon"><i class=" arrow fa-solid fa-arrow-right"></i></a>
+        <a href="#" class="trash-icon" (click)="deleteTask(task.id)"><i class="trash fa-solid fa-trash"></i></a>
+        <a href="#" class="arrow-icon"><i class=" arrow fa-solid fa-arrow-right"></i></a>
     </div>
     </div>
    </div>

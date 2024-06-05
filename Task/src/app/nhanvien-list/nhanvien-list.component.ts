@@ -2,11 +2,12 @@ import { Component,OnInit } from '@angular/core';
 import { INhanvien } from '../inhanvien';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nhanvien-list',
   standalone: true,
-  imports: [CommonModule,FormsModule
+  imports: [CommonModule,FormsModule,RouterModule,RouterLink
   ],
   templateUrl: './nhanvien-list.component.html',
   styleUrl: './nhanvien-list.component.css'
