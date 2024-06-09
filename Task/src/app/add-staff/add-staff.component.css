@@ -7,3 +7,10 @@ label{
     font-size: 20px;
     font-weight: 500;
 }
+.staff-form{
+    position: fixed;
+}
+
+.staff-list{
+    margin-left: 400px;
+}

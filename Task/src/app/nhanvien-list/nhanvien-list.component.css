@@ -11,43 +11,88 @@ body {
     height: 500px;
     margin:  100px 0 0 90px;
 }
-.project-container {
+.staff-container {
     display: flex;
-    gap: 20px;
-    margin: 20px 0 10px 50px ;
-}
-.project-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px;
-    text-align: center;
-}
+    flex-wrap: wrap;
+    gap: 16px; /* Khoảng cách giữa các thẻ */
+    justify-content: space-between; /* Căn đều các thẻ */
+  }
+  
+  .staff-card {
+    flex: 1 1 calc(25% - 16px); /* Mỗi thẻ chiếm 25% trừ đi khoảng cách */
+    box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước */
+    margin-bottom: 16px; /* Khoảng cách dưới mỗi thẻ */
+    background-color: #f8f9fa; /* Màu nền cho thẻ */
+    padding: 16px; /* Khoảng cách trong thẻ */
+    border: 1px solid #ddd; /* Viền cho thẻ */
+    border-radius: 8px; /* Bo tròn các góc */
+  }
+  
+  .staff-image {
+    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    border-radius: 50%; /* Bo tròn hình ảnh nếu là hình tròn */
+  }
+  
+  .staff-details {
+    text-align: center; /* Canh giữa văn bản */
+  }
+  
+  .staff-name {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  
+  .staff-location span {
+    font-weight: bold;
+  }
+  .staff-container {
+    margin: 30px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Khoảng cách giữa các thẻ */
+    justify-content: space-between; /* Căn đều các thẻ */
+  }
+  
+  .staff-card {
+    flex: 1 1 calc(25% - 16px); /* Mỗi thẻ chiếm 25% trừ đi khoảng cách */
+    box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước */
+    margin-bottom: 16px; /* Khoảng cách dưới mỗi thẻ */
+    background-color: #f8f9fa; /* Màu nền cho thẻ */
+    padding: 16px; /* Khoảng cách trong thẻ */
+    border: 1px solid #ddd; /* Viền cho thẻ */
+    border-radius: 8px; /* Bo tròn các góc */
+  }
+  
+  .staff-image {
+    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    border-radius: 50%; /* Bo tròn hình ảnh nếu là hình tròn */
+  }
+  
+  .staff-details {
+    text-align: center; /* Canh giữa văn bản */
+  }
+  
+  .staff-name {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  
+  .staff-location span {
+    font-weight: bold;
+  }
+    
 
-.project-image {
-    width: 100%;
-    height: auto;
-}
-
-.project-details {
-    padding: 16px;
-}
-
-.project-name {
-    margin: 0 0 8px;
-    font-size: 1.5em;
-}
-
-.project-status,
-.project-leader,
-.project-budget {
+.staff-status,
+.staff-leader,
+.staff-budget {
     margin: 4px 0;
 }
 
-.project-status span,
-.project-leader span,
-.project-budget span {
+.staff-status span,
+.staff-leader span,
+.staff-budget span {
     font-weight: bold;
     color: #555;
 }

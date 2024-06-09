@@ -15,4 +15,7 @@ export class NhanvienService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.apiUrl, nhanvien, { headers: headers });
   }
+  deleteNhanvien(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

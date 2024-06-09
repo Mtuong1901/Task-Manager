@@ -1,5 +1,5 @@
 export interface INhanvien {
-    id: number;
+    id?: number;
     ten_nv:string;
     ngay_sinh:Date;
     gioi_tinh:string;

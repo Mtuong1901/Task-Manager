@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const cors = require('cors');
-
+const moment = require('moment');
 app.use(cors());
 app.use(bodyParser.json()); // Middleware để phân tích body của yêu cầu POST
 app.use(express.json()); // Middleware để phân tích body của yêu cầu POST
@@ -32,18 +32,16 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
-app.get('/duan', async(req, res) => {
+app.get('/duan', async (req, res) => {
   try {
-     const data = await res.pool.query("SELECT * FROM du_an ORDER BY id desc");
-     if(data.length >0){
-      res.json(data);
-     }else{
-      res.status(404).json({ error: 'Project not found' });
-     }
+    const [rows] = await pool.query('SELECT * FROM du_an ORDER BY id DESC');
+    res.json(rows);
   } catch (error) {
-    console.log(error);
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
+
 
 app.get('/duan/:id', async (req, res) => {
   try {
@@ -126,33 +124,38 @@ app.get('/nhanvien/:id', async (req, res) => {
 
 app.post('/nhanvien', async (req, res) => {
   try {
-    const newStaff = req.body; // Trích xuất thông tin về công việc từ 
-    // Phản hồi với thông điệp thành công
-    console.log("da them thanh cong");
-    console.log(newStaff);
-    res.status(201).json(newStaff);
+    const {ten_nv, ngay_sinh, gioi_tinh, hinh_anh, khu_vuc } = req.body;
+    const formattedNgaySinh = moment(ngay_sinh).format('YYYY-MM-DD');
+    const query = 'INSERT INTO nhan_vien (ten_nv, ngay_sinh, gioi_tinh, hinh_anh, khu_vuc) VALUES (?, ?, ?, ?, ?)';
+    const values = [ten_nv, formattedNgaySinh, gioi_tinh, hinh_anh, khu_vuc];
+
+    const [result] = await pool.query(query, values);
+    console.log("Đã thêm thành công", result);
+    res.status(201).json({ message: 'Nhân viên đã được thêm thành công', data: req.body });
   } catch (error) {
-    console.error('Có lỗi xảy ra trong quá trình thêm công việc:', error);
-    // Phản hồi với thông điệp lỗi nếu có lỗi xảy ra
-    res.status(500).json({ error: 'Không thể thêm công việc. Vui lòng thử lại sau.' });
+    console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);
+    res.status(500).json({ error: 'Không thể thêm nhân viên. Vui lòng thử lại sau.' });
   }
 });
-app.delete('/nhanvien', (req, res) => {
-  // Xử lý logic xóa dữ liệu ở đây
-  // ...
-  res.status(200).send('Dữ liệu đã được xóa thành công.');
-});
-app.delete('/task', (req, res) => {
-  // Xử lý logic xóa dữ liệu ở đây
-  // ...
-  res.status(200).send('Dữ liệu đã được xóa thành công.');
-});
-app.put('/nhanvien', (req, res) => {
-  // Xử lý logic cập nhật dữ liệu ở đây
-  // ...
-  res.status(200).send('Dữ liệu đã được cập nhật thành công.');
-});
 
+app.delete('/nhanvien/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ error: 'ID nhân viên là bắt buộc' });
+    }
+    const query = 'DELETE FROM nhan_vien WHERE id = ?';
+    const [result] = await pool.query(query, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Không tìm thấy nhân viên với ID đã cho' });
+    }
+    res.status(200).json({ message: 'Nhân viên đã được xóa thành công' });
+  } catch (error) {
+    console.error('Có lỗi xảy ra trong quá trình xóa nhân viên:', error);
+    res.status(500).json({ error: 'Không thể xóa nhân viên. Vui lòng thử lại sau.' });
+  }
+});
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
