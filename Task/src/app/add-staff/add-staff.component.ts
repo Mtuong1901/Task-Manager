@@ -62,11 +62,12 @@ export class AddStaffComponent implements OnInit {
     };
   }
 
-  deleteStaff(id: any): void {
+  deleteStaff(id: number): void {
     this.nhanvienService.deleteNhanvien(id).subscribe(
       () => {
         alert('Nhân viên đã được xóa thành công!');
         this.staff = this.staff.filter(staff => staff.id !== id);
+        this.loadNhanvien();
       },
       error => {
         console.error('Có lỗi xảy ra trong quá trình xóa nhân viên:', error);

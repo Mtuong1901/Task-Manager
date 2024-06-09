@@ -124,20 +124,47 @@ app.get('/nhanvien/:id', async (req, res) => {
 
 app.post('/nhanvien', async (req, res) => {
   try {
-    const {ten_nv, ngay_sinh, gioi_tinh, hinh_anh, khu_vuc } = req.body;
-    const formattedNgaySinh = moment(ngay_sinh).format('YYYY-MM-DD');
-    const query = 'INSERT INTO nhan_vien (ten_nv, ngay_sinh, gioi_tinh, hinh_anh, khu_vuc) VALUES (?, ?, ?, ?, ?)';
-    const values = [ten_nv, formattedNgaySinh, gioi_tinh, hinh_anh, khu_vuc];
+    const { ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh } = req.body;
 
-    const [result] = await pool.query(query, values);
-    console.log("Đã thêm thành công", result);
-    res.status(201).json({ message: 'Nhân viên đã được thêm thành công', data: req.body });
+    if (!ten_nv || !gioi_tinh || !ngay_sinh || !khu_vuc || !hinh_anh) {
+      return res.status(400).json({ error: 'Tất cả các trường là bắt buộc' });
+    }
+
+    const [result] = await pool.query(
+      'INSERT INTO nhan_vien (ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh) VALUES (?, ?, ?, ?, ?)',
+      [ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh]
+    );
+
+    const newStaffId = result.insertId;
+    const [newStaff] = await pool.query('SELECT * FROM nhan_vien WHERE id = ?', [newStaffId]);
+
+    res.status(201).json(newStaff[0]);
+  } catch (error) {
+    console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);
+    res.status(500).json({ error: 'Không thể thêm nhân viên. Vui lòng thử lại sau.' });
+  }
+});app.post('/nhanvien', async (req, res) => {
+  try {
+    const { ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh } = req.body;
+
+    if (!ten_nv || !gioi_tinh || !ngay_sinh || !khu_vuc || !hinh_anh) {
+      return res.status(400).json({ error: 'Tất cả các trường là bắt buộc' });
+    }
+
+    const [result] = await pool.query(
+      'INSERT INTO nhan_vien (ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh) VALUES (?, ?, ?, ?, ?)',
+      [ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh]
+    );
+
+    const newStaffId = result.insertId;
+    const [newStaff] = await pool.query('SELECT * FROM nhan_vien WHERE id = ?', [newStaffId]);
+
+    res.status(201).json(newStaff[0]);
   } catch (error) {
     console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);
     res.status(500).json({ error: 'Không thể thêm nhân viên. Vui lòng thử lại sau.' });
   }
 });
-
 app.delete('/nhanvien/:id', async (req, res) => {
   try {
     const { id } = req.params;
