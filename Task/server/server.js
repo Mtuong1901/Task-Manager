@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const cors = require('cors');
-const moment = require('moment');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 app.use(cors());
-app.use(bodyParser.json()); // Middleware để phân tích body của yêu cầu POST
-app.use(express.json()); // Middleware để phân tích body của yêu cầu POST
+app.use(bodyParser.json());
+app.use(express.json());
+const secretKey = 'your-secret-key';
 
 // Kết nối đến cơ sở dữ liệu MySQL
 const pool = mysql.createPool({
@@ -35,6 +37,15 @@ app.get("/", (req, res) => {
 app.get('/duan', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM du_an ORDER BY id DESC');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.get('/user', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM users ORDER BY id DESC');
     res.json(rows);
   } catch (error) {
     console.error('Error:', error);
@@ -182,6 +193,48 @@ app.delete('/nhanvien/:id', async (req, res) => {
     console.error('Có lỗi xảy ra trong quá trình xóa nhân viên:', error);
     res.status(500).json({ error: 'Không thể xóa nhân viên. Vui lòng thử lại sau.' });
   }
+});
+// Xác thực người dùng và tạo token JWT
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body
+  try {
+    // Kiểm tra xem username có tồn tại trong cơ sở dữ liệu không
+    const [rows] = await pool.query('SELECT * FROM users WHERE username = ? and password =?', [username,password]);
+    
+    if (rows.length > 0) {
+      // Username và password tồn tại trong cơ sở dữ liệu
+      console.log('Login successful');
+      // Tạo token JWT
+      const token = jwt.sign({ username,password }, secretKey, { expiresIn: '1h' });
+      console.log(token);
+      res.status(200).json({ message: 'Login successful', token });
+    } else {
+      // Không tìm thấy username hoặc password không đúng
+      console.log('Invalid username or password');
+      res.status(401).json({ error: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error('Error during login:');
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+// Middleware để xác thực token
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.sendStatus(401); // Unauthorized
+  
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) return res.sendStatus(403); // Forbidden
+    req.user = user;
+    next();
+  });
+}
+
+// Sử dụng middleware authenticateToken để xác thực token
+app.get('/protected', authenticateToken, (req, res) => {
+  // Nếu token hợp lệ, tiếp tục xử lý request
+  res.json({ message: 'Authenticated successfully' });
 });
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);

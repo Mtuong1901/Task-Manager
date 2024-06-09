@@ -1,14 +1,20 @@
 <div class="login-container">
-    <form class="login-form">
+    <form class="login-form" #myForm="ngForm" (ngSubmit)="onLogin(myForm)">
         <h2>Login</h2>
         <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" ngModel required #username="ngModel">
+            <div *ngIf="username.errors?.['required'] && (username.dirty || username.touched)" style="color:red">
+                Vui lòng nhập username
+            </div>
         </div>
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" ngModel required #password="ngModel">
+            <div *ngIf="password.errors?.['required'] && (password.dirty || password.touched)" style="color:red">
+                Vui lòng nhập password
+            </div>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" [disabled]="myForm.invalid">Login</button>
     </form>
 </div>
