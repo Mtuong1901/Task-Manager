@@ -24,6 +24,14 @@
             <li><a href="#" routerLink="/task">Task</a></li>
             <li><a href="#">Lich</a></li>
             <li><a href="#">Cai dat</a></li>
+            <li *ngIf="user && user.role === 'admin'">
+              <a (click)="toggleAdminMenu()">Admin Dashboard</a>
+              <ul *ngIf="showAdminMenu">
+                <li><a routerLink="/admin/users">Manage Users</a></li>
+                <li><a routerLink="/admin/settings">Admin Settings</a></li>
+                <li><a routerLink="/admin/reports">Reports</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
         <div class="col-lg-10 main-side">

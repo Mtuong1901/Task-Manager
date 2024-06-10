@@ -170,28 +170,7 @@ app.post('/nhanvien', async (req, res) => {
     console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);
     res.status(500).json({ error: 'Không thể thêm nhân viên. Vui lòng thử lại sau.' });
   }
-});app.post('/nhanvien', async (req, res) => {
-  try {
-    const { ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh } = req.body;
-
-    if (!ten_nv || !gioi_tinh || !ngay_sinh || !khu_vuc || !hinh_anh) {
-      return res.status(400).json({ error: 'Tất cả các trường là bắt buộc' });
-    }
-
-    const [result] = await pool.query(
-      'INSERT INTO nhan_vien (ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh) VALUES (?, ?, ?, ?, ?)',
-      [ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh]
-    );
-
-    const newStaffId = result.insertId;
-    const [newStaff] = await pool.query('SELECT * FROM nhan_vien WHERE id = ?', [newStaffId]);
-
-    res.status(201).json(newStaff[0]);
-  } catch (error) {
-    console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);
-    res.status(500).json({ error: 'Không thể thêm nhân viên. Vui lòng thử lại sau.' });
-  }
-});
+})
 app.delete('/nhanvien/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -236,7 +215,8 @@ app.post('/login', async (req, res) => {
       // Username và password tồn tại trong cơ sở dữ liệu
       console.log('Login successful');
       // Tạo token JWT
-      const token = jwt.sign({ username,password }, secretKey, { expiresIn: '1h' });
+      const { role } = rows[0];
+      const token = jwt.sign({ username,password,role }, secretKey, { expiresIn: '1h' });
       console.log(token);
       res.status(200).json({ message: 'Login successful', token });
     } else {

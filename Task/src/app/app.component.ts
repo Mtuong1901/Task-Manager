@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'Task';
   user: any = null;
+  showAdminMenu = false;
   constructor(private authService: AuthService) {}
     ngOnInit(): void {
     this.user = this.authService.getUserInfo()
@@ -23,5 +24,8 @@ export class AppComponent {
     logOut() {
     this.authService.logout();
     this.user=null
+    }
+    toggleAdminMenu() {
+      this.showAdminMenu = !this.showAdminMenu;
     }
 }

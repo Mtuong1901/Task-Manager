@@ -80,4 +80,8 @@ export class AuthService {
     }
     return '';
   }
+  hasRole(role: string): boolean {
+    const userInfo = this.getUserInfo();
+    return userInfo && userInfo.role === role;
+  }
 }
