@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +13,7 @@ export class AuthService {
   private userSubject = new BehaviorSubject<any>(null);
   user$ = this.userSubject.asObservable();
   private isAuthenticated = false;
-
+  private apiUrl = 'http://localhost:5000';
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
@@ -31,7 +31,17 @@ export class AuthService {
   }
   
   
-
+  signup(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/signup`, { username, password })
+      .pipe(
+        
+        map(response => {
+          alert('Dang ky thanh cong, chuyen sang trang DANG NHAP')
+          this.router.navigate(['/login']);
+          return response;
+        })
+      );
+  }
   logout() {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('access_token');

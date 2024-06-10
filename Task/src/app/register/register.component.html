@@ -1,0 +1,30 @@
+<div class="signup-container">
+    <form class="signup-form" #myForm="ngForm" (ngSubmit)="onSignup(myForm)">
+        <h2>Đăng ký</h2>
+        <div class="input-group">
+            <label for="username">Tên người dùng</label>
+            <input type="text" id="username" name="username" ngModel required #username="ngModel">
+            <div *ngIf="username.errors?.['required'] && (username.dirty || username.touched)" style="color:red">
+                Vui lòng nhập tên người dùng
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" ngModel required #password="ngModel">
+            <div *ngIf="password.errors?.['required'] && (password.dirty || password.touched)" style="color:red">
+                Vui lòng nhập mật khẩu
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="confirmPassword">Xác nhận mật khẩu</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" ngModel required #confirmPassword="ngModel">
+            <div *ngIf="confirmPassword.errors?.['required'] && (confirmPassword.dirty || confirmPassword.touched)" style="color:red">
+                Vui lòng xác nhận mật khẩu
+            </div>
+            <div *ngIf="myForm.dirty && myForm.value.password !== myForm.value.confirmPassword" style="color:red">
+                Mật khẩu và xác nhận mật khẩu không khớp
+            </div>
+        </div>
+        <button type="submit" [disabled]="myForm.invalid">Đăng ký</button>
+    </form>
+</div>

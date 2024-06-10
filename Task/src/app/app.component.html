@@ -11,6 +11,7 @@
       <ul>
         <li><a href="#" routerLink="/login">Login</a></li>
       </ul>
+      <ul><li><a href="#" routerLink="/signup">Register</a></li></ul>
       <div style="color:white" class="d-flex" *ngIf="user!==null">
         {{"Xin chào, "+user.username}} <button (click)="logOut()">Đăng Xuất</button>
         </div>

@@ -9,6 +9,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { NhanvienListComponent } from './nhanvien-list/nhanvien-list.component';
 import { LoginComponent } from './login/login.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
     {path : '',component: HomeComponent,title:'Home' },
@@ -19,5 +20,6 @@ export const routes: Routes = [
     {path : 'nhanvien', component: NhanvienListComponent},
     {path: 'nhanvien/add-nhanvien',component: AddStaffComponent},
     {path: 'login',component: LoginComponent},
+    {path: 'signup', component: RegisterComponent},
     {path : '**',component: NotfoundComponent}
 ];

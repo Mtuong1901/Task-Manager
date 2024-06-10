@@ -236,6 +236,22 @@ app.get('/protected', authenticateToken, (req, res) => {
   // Nếu token hợp lệ, tiếp tục xử lý request
   res.json({ message: 'Authenticated successfully' });
 });
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const [result] = await pool.query(
+      'INSERT INTO users (username, password) VALUES (?, ?)',
+      [username, password]
+    );
+    console.log('Đăng ký thành công');
+    console.log(result);
+    res.status(200).json({ message: 'Đăng ký thành công!' });
+  } catch (error) {
+    console.error('Đăng ký thất bại:', error);
+    res.status(500).json({ message: 'Đăng ký thất bại!' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
