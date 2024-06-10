@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IDuan } from "../iduan";
-import { ProjectService } from "../service/project.service";
+import { IDuan } from "../../iduan";
+import { ProjectService } from "../../service/project.service";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({

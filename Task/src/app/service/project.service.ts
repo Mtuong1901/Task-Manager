@@ -18,4 +18,8 @@ export class ProjectService {
   deleteDuan(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  getDuanById(id: number): Observable<IDuan> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<IDuan>(url);
+  }
 }

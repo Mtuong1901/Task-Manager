@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ITask } from '../itask';
+import { ITask } from '../../itask';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TaskService } from '../service/task.service';
+import { TaskService } from '../../service/task.service';
 
 @Component({
   selector: 'app-add-task',

@@ -1,20 +1,22 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { DuanListComponent } from './duan-list/duan-list.component';
-import { TaskListComponent } from './task-list/task-list.component';
-import { AddDuanComponent } from './add-duan/add-duan.component';
+import { HomeComponent } from './load/home/home.component';
+import { DuanListComponent } from './load/duan-list/duan-list.component';
+import { TaskListComponent } from './load/task-list/task-list.component';
+import { AddDuanComponent } from './add/add-duan/add-duan.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { AddTaskComponent } from './add-task/add-task.component';
+import { AddTaskComponent } from './add/add-task/add-task.component';
 
-import { NhanvienListComponent } from './nhanvien-list/nhanvien-list.component';
+import { NhanvienListComponent } from './load/nhanvien-list/nhanvien-list.component';
 import { LoginComponent } from './login/login.component';
-import { AddStaffComponent } from './add-staff/add-staff.component';
+import { AddStaffComponent } from './add/add-staff/add-staff.component';
 import { RegisterComponent } from './register/register.component';
+import { DuanchitietComponent } from './detail/duanchitiet/duanchitiet.component';
 
 export const routes: Routes = [
     {path : '',component: HomeComponent,title:'Home' },
     {path : 'duan',component: DuanListComponent},
     {path : 'duan/add-duan',component: AddDuanComponent},
+    {path : 'duan/:id',component:DuanchitietComponent},
     {path : 'task',component: TaskListComponent},
     {path : 'task/add-task',component: AddTaskComponent},
     {path : 'nhanvien', component: NhanvienListComponent},

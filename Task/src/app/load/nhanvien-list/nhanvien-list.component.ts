@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { INhanvien } from '../inhanvien';
+import { INhanvien } from '../../inhanvien';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';

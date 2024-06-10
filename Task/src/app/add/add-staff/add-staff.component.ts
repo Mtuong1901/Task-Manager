@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NhanvienService } from "../service/nhanvien.service";
-import { INhanvien } from '../inhanvien';
+import { NhanvienService } from "../../service/nhanvien.service";
+import { INhanvien } from '../../inhanvien';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

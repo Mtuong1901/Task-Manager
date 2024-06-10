@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { ITask } from '../itask';
+import { ITask } from '../../itask';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { RouterLink, RouterModule } from '@angular/router';
