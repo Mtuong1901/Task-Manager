@@ -1,1 +1,44 @@
-<p>add-duan works!</p>
+<div class="staff-container">
+    <div class="staff-form">
+        <form action="" class="form">
+            <label for="">Ten Nhan vien</label><br>
+            <input type="text" name="ten_nv" [(ngModel)]="newProject.ten"><br>
+            <label for="">Ngay Bat Dau</label><br>
+            <input type="date" name="ngay_sinh"[(ngModel)]="newProject.ngay_bat_dau"><br>
+            <label for="">Nhom Truong</label><br>
+            <input type="text" name="khu_vuc" [(ngModel)]="newProject.nhom_truong"><br>
+            <label for="">Thanh Vien</label><br>
+            <input type="text" name="khu_vuc" [(ngModel)]="newProject.thanh_vien"><br>
+            <label for="">Hinh_anh(link)</label> <br>
+            <input type="text" name="hinh_anh"[(ngModel)]="newProject.hinh_anh"> <br>
+            <button type="submit" class="btn btn-success" (click)="addDuan()">Them</button>
+        </form>
+    </div>
+    <div class="staff-list">
+        <table class="table table-bordered">
+            <thead>
+                <tr >
+                    <th>Tên</th>
+                    <th>Hinh_anh</th>
+                    <th>Ngày bat dau</th>
+                    <th>Nhom truong</th>
+                    <th>Thanh vien</th>
+                    <th>Trang thai</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pro of project">
+                    <td>{{pro.ten}}</td>
+                    <td><img src="{{pro.hinh_anh}}" alt="" width="100px"></td>
+                    <td>{{pro.ngay_bat_dau.toString().split('T')[0]}}</td>
+                    <td>{{pro.nhom_truong}}</td>
+                    <td>{{pro.thanh_vien}}</td>
+                    <td>{{pro.trang_thai}}</td>
+                    <td><a class="btn btn-danger" (click)="deleteDuan(pro.id!)">Delete</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>

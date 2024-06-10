@@ -68,6 +68,22 @@ app.get('/duan/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+app.post('/duan', async (req, res) => {
+  const { ten,ngay_bat_dau,nhom_truong,thanh_vien,hinh_anh } = req.body;
+  try {
+    const formatted_ngay_bat_dau = new Date(ngay_bat_dau).toISOString().split('T')[0];
+    const [result] = await pool.query(
+      'INSERT INTO du_an (ten,ngay_bat_dau,nhom_truong,thanh_vien,hinh_anh) VALUES (?, ?, ?, ?, ?)',
+      [ten,formatted_ngay_bat_dau,nhom_truong,thanh_vien,hinh_anh]
+    );
+    console.log('them du an thanh cong');
+    console.log(result);
+    res.status(200).json({ message: 'Added project!' });
+  } catch (error) {
+    console.error('Fail to create project:', error);
+    res.status(500).json({ message: 'failed create project!' });
+  }
+});
 
 app.get('/task', async (req, res) => {
   try {
@@ -192,6 +208,21 @@ app.delete('/nhanvien/:id', async (req, res) => {
   } catch (error) {
     console.error('Có lỗi xảy ra trong quá trình xóa nhân viên:', error);
     res.status(500).json({ error: 'Không thể xóa nhân viên. Vui lòng thử lại sau.' });
+  }
+});
+app.delete('/duan/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const query = 'DELETE FROM du_an WHERE id = ?';
+    const [result] = await pool.query(query, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Không tìm thấy du an với ID đã cho' });
+    }
+    res.status(200).json({ message: 'Du an đã được xóa thành công' });
+  } catch (error) {
+    console.error('Có lỗi xảy ra trong quá trình xóa du an:', error);
+    res.status(500).json({ error: 'Không thể xóa du an. Vui lòng thử lại sau.' });
   }
 });
 // Xác thực người dùng và tạo token JWT

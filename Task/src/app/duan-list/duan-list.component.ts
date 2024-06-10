@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IDuan } from '../iduan';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-duan-list',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterModule,RouterLink],
   templateUrl: './duan-list.component.html',
   styleUrls: ['./duan-list.component.css']
 })

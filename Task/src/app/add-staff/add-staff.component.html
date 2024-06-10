@@ -31,7 +31,7 @@
                 <tr *ngFor="let nv of staff">
                     <td>{{nv.ten_nv}}</td>
                     <td><img src="{{nv.hinh_anh}}" alt="" width="100px"></td>
-                    <td>{{nv.ngay_sinh}}</td>
+                    <td>{{nv.ngay_sinh.toString().split('T')[0]}}</td>
                     <td>{{nv.gioi_tinh}}</td>
                     <td>{{nv.khu_vuc}}</td>
                     <td><a class="btn btn-primary">Edit</a>/<a class="btn btn-danger" (click)="deleteStaff(nv.id!)">Delete</a></td>

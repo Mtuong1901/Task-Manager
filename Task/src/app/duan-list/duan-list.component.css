@@ -15,6 +15,8 @@ body {
     display: flex;
     gap: 20px;
     margin: 20px 0 10px 50px ;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .project-card {
     background-color: white;
@@ -23,6 +25,8 @@ body {
     overflow: hidden;
     width: 300px;
     text-align: center;
+    width: 23%; /* Đảm bảo không có khoảng trống giữa các dự án */
+    margin-bottom: 20px;
 }
 
 .project-image {
