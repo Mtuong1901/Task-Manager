@@ -1,42 +1,21 @@
 <div class="container mt-5">
-    <h1 class="mb-4">Danh Sách Nhân Viên</h1>
+    <h1 class="mb-4">Danh Sách User</h1>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên</th>
-                <th scope="col">Phòng Ban</th>
-                <th scope="col">Chức Vụ</th>
-                <th scope="col">Email</th>
-                <th scope="col">Số Điện Thoại</th>
+                <th scope="col">Vai trò</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Nguyễn Văn A</td>
-                <td>Kế Toán</td>
-                <td>Trưởng Phòng</td>
-                <td>nva</td>
-                <td>0123456789</td>
+            <tr *ngFor="let user of users; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td><a class="btn btn-primary w-50">Edit</a><a class="btn btn-danger w-50" (click)="deleteUser(user.id!)">Delete</a></td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Trần Thị B</td>
-                <td>Nhân Sự</td>
-                <td>Nhân Viên</td>
-                <td>ttb.com</td>
-                <td>0987654321</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Lê Văn C</td>
-                <td>IT</td>
-                <td>Kỹ Thuật Viên</td>
-                <td>lvc.com</td>
-                <td>0912345678</td>
-            </tr>
-            <!-- Thêm các hàng nhân viên khác ở đây -->
         </tbody>
     </table>
 </div>
