@@ -3,11 +3,12 @@ import { AdminService } from "../../service/admin.service";
 import { IUser } from "../../iuser";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink,RouterModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })

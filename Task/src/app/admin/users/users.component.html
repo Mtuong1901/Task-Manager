@@ -14,7 +14,7 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ user.username }}</td>
                 <td>{{ user.role }}</td>
-                <td><a class="btn btn-primary w-50">Edit</a><a class="btn btn-danger w-50" (click)="deleteUser(user.id!)">Delete</a></td>
+                <td><a class="btn btn-primary w-50" routerLink="/admin/users/edit/{{user.id}}">Edit</a><a class="btn btn-danger w-50" (click)="deleteUser(user.id!)">Delete</a></td>
             </tr>
         </tbody>
     </table>

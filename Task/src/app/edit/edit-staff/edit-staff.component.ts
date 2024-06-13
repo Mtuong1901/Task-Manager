@@ -51,7 +51,7 @@ export class EditStaffComponent implements OnInit{
       (response) => {
         console.log('Cập nhật nhân viên thành công!', response);
         alert('Lưu thành công!');
-        this.router.navigate(['/nhanvien']);
+        this.router.navigate(['nhanvien']);
       },
       (error) => {
         console.error('Lỗi khi cập nhật nhân viên:', error);

@@ -14,12 +14,15 @@ import { UsersComponent } from './admin/users/users.component';
 import path from 'path';
 import { AdminComponent } from './admin/admin/admin.component';
 import { EditStaffComponent } from './edit/edit-staff/edit-staff.component';
+import { AuthGuard } from './auth.guard';
+import { EdituserComponent } from './edit/edituser/edituser.component';
 
 export const routes: Routes = [
     {path : '',component: HomeComponent,title:'Home' },
     {path : 'duan',component: DuanListComponent},
-    {path: 'admin',component:AdminComponent},
-    {path : 'admin/users',component:UsersComponent},
+    {path: 'admin',component:AdminComponent,canActivate:[AuthGuard]},
+    {path : 'admin/users',component:UsersComponent,canActivate:[AuthGuard]},
+    {path : 'admin/users/edit/:id',component:EdituserComponent,canActivate:[AuthGuard]},
     {path : 'duan/add-duan',component: AddDuanComponent},
     {path : 'duan/:id',component:DuanchitietComponent},
     {path : 'task',component: TaskListComponent},

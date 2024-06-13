@@ -9,8 +9,12 @@ label{
 }
 .staff-form{
     position: fixed;
+    margin:  0 0 0 100px;
 }
 
 .staff-list{
     margin-left: 400px;
+}
+table{
+    width: 900px;
 }
