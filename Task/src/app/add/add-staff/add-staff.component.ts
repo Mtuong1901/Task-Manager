@@ -3,11 +3,12 @@ import { NhanvienService } from "../../service/nhanvien.service";
 import { INhanvien } from '../../inhanvien';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-add-staff',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink,RouterModule],
   templateUrl: './add-staff.component.html',
   styleUrls: ['./add-staff.component.css']
 })
@@ -44,6 +45,7 @@ export class AddStaffComponent implements OnInit {
         alert('Nhân viên đã được thêm thành công!');
         this.staff.push(response); // Thêm nhân viên mới vào danh sách
         this.newStaff = this.createEmptyStaff();
+        this.loadNhanvien();
       },
       error => {
         console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);

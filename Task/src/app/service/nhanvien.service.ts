@@ -18,4 +18,12 @@ export class NhanvienService {
   deleteNhanvien(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  getStaffById(id:number) : Observable<any> {
+    const url = `${this.apiUrl}/edit/${id}`;
+    return this.http.get<any>(url);
+  }
+  updateStaff(id: number, updatedData: any): Observable<any> {
+    const url = `${this.apiUrl}/edit/${id}`;
+    return this.http.put<any>(url, updatedData);
+  }
 }

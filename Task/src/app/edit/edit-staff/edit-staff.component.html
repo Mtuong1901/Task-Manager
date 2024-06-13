@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h2>Chỉnh sửa nhân viên</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="ten_nv" class="form-label">Tên nhân viên</label>
+        <input type="text" id="ten_nv" name="ten_nv" [(ngModel)]="staff.ten_nv" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="hinh_anh" class="form-label">Hình ảnh</label>
+        <input type="text" id="hinh_anh" name="hinh_anh" [(ngModel)]="staff.hinh_anh" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="ngay_sinh" class="form-label">Ngày sinh</label>
+        <input type="text" id="ngay_sinh" name="ngay_sinh" [(ngModel)]="staff.ngay_sinh" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="gioi_tinh" class="form-label">Giới tính</label>
+        <select id="gioi_tinh" name="gioi_tinh" [(ngModel)]="staff.gioi_tinh" class="form-select">
+          <option value="Nam">Nam</option>
+          <option value="Nữ">Nữ</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="khu_vuc" class="form-label">Khu vực</label>
+        <input type="text" id="khu_vuc" name="khu_vuc" [(ngModel)]="staff.khu_vuc" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Lưu</button>
+    </form>
+</div>

@@ -13,6 +13,7 @@ import { DuanchitietComponent } from './detail/duanchitiet/duanchitiet.component
 import { UsersComponent } from './admin/users/users.component';
 import path from 'path';
 import { AdminComponent } from './admin/admin/admin.component';
+import { EditStaffComponent } from './edit/edit-staff/edit-staff.component';
 
 export const routes: Routes = [
     {path : '',component: HomeComponent,title:'Home' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
     {path : 'task/add-task',component: AddTaskComponent},
     {path : 'nhanvien', component: NhanvienListComponent},
     {path: 'nhanvien/add-nhanvien',component: AddStaffComponent},
+    {path: 'nhanvien/edit/:id',component:EditStaffComponent},
     {path: 'login',component: LoginComponent},
     {path: 'signup', component: RegisterComponent},
     {path : '**',component: NotfoundComponent}

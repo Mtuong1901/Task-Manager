@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms'; // Import NgForm từ @angular/forms
+import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from "../service/auth.service";
 
 @Component({
@@ -8,7 +8,7 @@ import { AuthService } from "../service/auth.service";
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] // Chú ý đến styleUrlS ở đây
+  styleUrls: ['./login.component.css'] 
 })
 export class LoginComponent {
   constructor(private authService: AuthService) { }
@@ -20,7 +20,7 @@ export class LoginComponent {
     const username = form.value.username;
     const password = form.value.password;
     this.authService.login(username, password).subscribe(
-      
+      this.authService.isLoggedIn
     );
   }
 }

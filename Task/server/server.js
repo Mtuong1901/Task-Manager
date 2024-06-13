@@ -176,10 +176,9 @@ app.post('/nhanvien', async (req, res) => {
       [ten_nv, gioi_tinh, ngay_sinh, khu_vuc, hinh_anh]
     );
 
-    const newStaffId = result.insertId;
-    const [newStaff] = await pool.query('SELECT * FROM nhan_vien WHERE id = ?', [newStaffId]);
+    
 
-    res.status(201).json(newStaff[0]);
+    res.status(201).json(result);
   } catch (error) {
     console.error('Có lỗi xảy ra trong quá trình thêm nhân viên:', error);
     res.status(500).json({ error: 'Không thể thêm nhân viên. Vui lòng thử lại sau.' });
@@ -202,6 +201,51 @@ app.delete('/nhanvien/:id', async (req, res) => {
     console.error('Có lỗi xảy ra trong quá trình xóa nhân viên:', error);
     res.status(500).json({ error: 'Không thể xóa nhân viên. Vui lòng thử lại sau.' });
   }
+});
+app.get('/nhanvien/edit/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await pool.query('SELECT * FROM nhan_vien WHERE id = ?', [id]);
+    if (rows.length > 0) {
+      res.json(rows[0]);
+    } else {
+      res.status(404).json({ error: 'staff not found' });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.put('/nhanvien/edit/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  const query = `
+    UPDATE nhan_vien
+    SET ten_nv = ?, ngay_sinh = ?, gioi_tinh = ?, khu_vuc = ?, hinh_anh = ?
+    WHERE id = ?;
+  `;
+
+  const values = [
+    updatedData.ten_nv,
+    updatedData.ngay_sinh,
+    updatedData.gioi_tinh,
+    updatedData.khu_vuc,
+    updatedData.hinh_anh,
+    id
+  ];
+
+  pool.query(query, values, (err, results) => {
+    if (err) {
+      return res.status(500).send({ message: 'Đã xảy ra lỗi khi cập nhật thông tin nhân viên', error: err });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).send({ message: 'Nhân viên không tồn tại' });
+    }
+
+    res.send({ message: 'Cập nhật thông tin nhân viên thành công' });
+  });
 });
 app.delete('/duan/:id', async (req, res) => {
   try {
