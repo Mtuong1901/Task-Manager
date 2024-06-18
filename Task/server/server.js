@@ -262,23 +262,18 @@ app.delete('/duan/:id', async (req, res) => {
     res.status(500).json({ error: 'Không thể xóa du an. Vui lòng thử lại sau.' });
   }
 });
-// Xác thực người dùng và tạo token JWT
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
   try {
-    // Kiểm tra xem username có tồn tại trong cơ sở dữ liệu không
     const [rows] = await pool.query('SELECT * FROM users WHERE username = ? and password =?', [username,password]);
     
     if (rows.length > 0) {
-      // Username và password tồn tại trong cơ sở dữ liệu
       console.log('Login successful');
-      // Tạo token JWT
       const { role } = rows[0];
       const token = jwt.sign({ username,password,role }, secretKey, { expiresIn: '1h' });
       console.log(token);
       res.status(200).json({ message: 'Login successful', token });
     } else {
-      // Không tìm thấy username hoặc password không đúng
       console.log('Invalid username or password');
       res.status(401).json({ error: 'Invalid username or password' });
     }
@@ -300,9 +295,7 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// Sử dụng middleware authenticateToken để xác thực token
 app.get('/protected', authenticateToken, (req, res) => {
-  // Nếu token hợp lệ, tiếp tục xử lý request
   res.json({ message: 'Authenticated successfully' });
 });
 app.post('/signup', async (req, res) => {

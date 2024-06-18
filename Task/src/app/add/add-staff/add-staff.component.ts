@@ -43,7 +43,7 @@ export class AddStaffComponent implements OnInit {
     this.nhanvienService.addNhanvien(this.newStaff).subscribe(
       response => {
         alert('Nhân viên đã được thêm thành công!');
-        this.staff.push(response); // Thêm nhân viên mới vào danh sách
+        this.staff.push(response);
         this.newStaff = this.createEmptyStaff();
         this.loadNhanvien();
       },
@@ -66,15 +66,12 @@ export class AddStaffComponent implements OnInit {
 
   deleteStaff(id: number): void {
     this.nhanvienService.deleteNhanvien(id).subscribe(
-      () => {
+      () =>{
         alert('Nhân viên đã được xóa thành công!');
-        this.staff = this.staff.filter(staff => staff.id !== id);
+        console.log("xoa thanh cong");
         this.loadNhanvien();
-      },
-      error => {
-        console.error('Có lỗi xảy ra trong quá trình xóa nhân viên:', error);
-        alert('Không thể xóa nhân viên. Vui lòng thử lại sau.');
       }
-    );
+      
+    )
   }
 }
